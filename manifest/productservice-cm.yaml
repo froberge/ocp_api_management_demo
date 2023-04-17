@@ -7,6 +7,4 @@ data:
   quarkus.http.cors: 'true'
   quarkus.http.cors.methods: '*'
   quarkus.http.cors.origins: '*'
-  quarkus.datasource.jdbc.url: jdbc:postgresql://postgresql/postgresdb
-  quarkus.datasource.password: YWRtaW4=
-  quarkus.datasource.username: YWRtaW4=
+  
