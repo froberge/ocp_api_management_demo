@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: product-service-config
+  #namespace: 'DEFINE BY WHERE IT IS RUN OR ENTER IT HERE'
+data:
+  quarkus.http.cors: 'true'
+  quarkus.http.cors.methods: '*'
+  quarkus.http.cors.origins: '*'
+  quarkus.datasource.jdbc.url: jdbc:postgresql://postgresql/postgresdb
+  quarkus.datasource.password: admin
+  quarkus.datasource.username: admin
