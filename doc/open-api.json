@@ -1,0 +1,74 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "CoffeeShop",
+        "version": "1.0.0",
+        "description": "CoffeeShop API"
+    },
+    "paths": {
+        "/product": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/product"
+                                    }
+                                },
+                                "examples": {
+                                    "all": {
+                                        "value": {
+                                            "id": 1,
+                                            "name": "Cortado",
+                                            "description": "Description Cortado",
+                                            "size": "small",
+                                            "price": "3.50"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product/{id}": {}
+    },
+    "components": {
+        "schemas": {
+            "product": {
+                "title": "Root Type for product",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "size": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "id": 1,
+                    "name": "Cortado",
+                    "description": "Description Cortado",
+                    "size": "small",
+                    "price": "3.50"
+                }
+            }
+        }
+    }
+}

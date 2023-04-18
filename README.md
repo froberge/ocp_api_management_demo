@@ -72,12 +72,12 @@ Application plans establish rules like limits, pricing, and features for using y
 1. Under Integration go to `Methods & Metrics`
 1. Click `Add a method`
     * `Firendly name:` Get Coffees
-    * `System name: ` coffees_all
-    * Description: ` Method to return all the coffees
+    * `System name:` coffees_all
+    * `Description:` Method to return all the coffees
 1. Click Create Method
 1. Go to Mapping Rules
 1. Click on the edit pencil
-1. change the patern for `/product`
+1. Change the patern for `/product`
 1. `Update Mapping Rule`
 
 ### Step 5: Define your API Policies
@@ -105,7 +105,43 @@ Red Hat 3scale API Management provides units of functionality that modify the be
 1. Click `Create BackEnd`
 1. Click `Add to Product`
 
-### Step 7: Publush the API
+### Step 7: Publish the API
 
 1. Click on `Configuration` 9 Notice the warning sign beside
 1. Select Promote v.X to Staging APIcast
+
+### Step 8: Insert in Backstage.
+
+In order for backstage to be able to publish the information it need access to the open API documentation.
+
+1. From the `Dashboard` select the desired `Product`.
+1. Once in the `Product` select `ActiveDocs`
+1. Click `Create a new spec`
+1. Fill in the information.  Use the json from [this file](doc/open-api.json)
+1. Wait for a couple of minutes, backstage should update
+
+----
+
+
+### Step 9: Secure API with RHSSO
+
+1. Go to the `Dashboard Page`
+1. On the `ConfeeShop API` go to `Integration`
+1. Click on `Setting`
+1. Change `Authentication for OpenID Connect`
+    * Select Red Hat Single Sign-On
+    * Enter the Connect Issuer Url
+1. Select `Authorization Code Flow` & `Service Acounts Flow`
+1. Select `As HTTP Headers`
+1. `Update Product`
+    :warning: You should se a exlamation point beside configuration appear
+1. Go to Configuration and promote the `Staging APIcast`
+
+### Step 10: Create a Test App
+1. Go to the Main Menu select `Audience`
+1. Click on `developer`
+1. Click on `Application`
+1. Click on `dev_coffeeshop_app`
+1. Click on `Add Random Key`
+1. Modify the user manually on Keycloak
+1. test using RHSSO
