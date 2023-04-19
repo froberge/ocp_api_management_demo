@@ -1,74 +1,157 @@
 {
-    "openapi": "3.0.2",
-    "info": {
-        "title": "CoffeeShop",
-        "version": "1.0.0",
-        "description": "CoffeeShop API"
+    "openapi" : "3.0.3",
+    "info" : {
+      "title" : "product-service API",
+      "version" : "1.0.0-SNAPSHOT"
     },
-    "paths": {
-        "/product": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/product"
-                                    }
-                                },
-                                "examples": {
-                                    "all": {
-                                        "value": {
-                                            "id": 1,
-                                            "name": "Cortado",
-                                            "description": "Description Cortado",
-                                            "size": "small",
-                                            "price": "3.50"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+    "paths" : {
+      "/product" : {
+        "get" : {
+          "tags" : [ "Product Resource" ],
+          "summary" : "Return all the products list",
+          "responses" : {
+            "200" : {
+              "description" : "Products are returned",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "type" : "array",
+                    "items" : {
+                      "$ref" : "#/components/schemas/Product"
                     }
+                  }
                 }
+              }
             }
-        },
-        "/product/{id}": {}
-    },
-    "components": {
-        "schemas": {
-            "product": {
-                "title": "Root Type for product",
-                "description": "",
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string"
-                    },
-                    "size": {
-                        "type": "string"
-                    },
-                    "price": {
-                        "type": "string"
-                    }
-                },
-                "example": {
-                    "id": 1,
-                    "name": "Cortado",
-                    "description": "Description Cortado",
-                    "size": "small",
-                    "price": "3.50"
-                }
-            }
+          }
         }
+      },
+      "/product/count" : {
+        "get" : {
+          "tags" : [ "Product Resource" ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "format" : "int64",
+                    "type" : "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/product/health" : {
+        "get" : {
+          "tags" : [ "Product Resource" ],
+          "summary" : "Check if the service is up and ready to receive request",
+          "responses" : {
+            "200" : {
+              "description" : "Service is Ready",
+              "content" : {
+                "text/plain" : {
+                  "schema" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/product/size/{size}" : {
+        "get" : {
+          "tags" : [ "Product Resource" ],
+          "parameters" : [ {
+            "name" : "size",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "OK",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "type" : "array",
+                    "items" : {
+                      "$ref" : "#/components/schemas/Product"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/product/{id}" : {
+        "get" : {
+          "tags" : [ "Product Resource" ],
+          "summary" : "Select a particular product",
+          "parameters" : [ {
+            "name" : "id",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "format" : "int32",
+              "type" : "integer"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "Select product is return",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "$ref" : "#/components/schemas/Product"
+                  }
+                }
+              }
+            },
+            "204" : {
+              "description" : "No product found"
+            }
+          }
+        }
+      }
+    },
+    "components" : {
+      "schemas" : {
+        "LocalDate" : {
+          "format" : "date",
+          "type" : "string",
+          "example" : "2022-03-10"
+        },
+        "Product" : {
+          "type" : "object",
+          "properties" : {
+            "id" : {
+              "format" : "int32",
+              "type" : "integer"
+            },
+            "name" : {
+              "type" : "string"
+            },
+            "description" : {
+              "type" : "string"
+            },
+            "size" : {
+              "type" : "string"
+            },
+            "price" : {
+              "type" : "string"
+            },
+            "create_date" : {
+              "$ref" : "#/components/schemas/LocalDate"
+            }
+          }
+        }
+      }
     }
-}
+  }
