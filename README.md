@@ -102,7 +102,7 @@ Application plans establish rules like limits, pricing, and features for using y
 ### Defining the Audience
 
 1. In the Main Menu select `Audience`
-    ![audience](doc/images/audience.png
+    ![audience](doc/images/audience.png)
 1. On the default Account, select the `link under apps`
 1. On that page click `Create Application`
     * `Product:` CoffeeShop
