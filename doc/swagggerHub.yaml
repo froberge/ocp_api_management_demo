@@ -1,0 +1,161 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/froberge/product_service/1.0.0
+info:
+  description: This is the API for the product Service
+  version: 1.0.0-SHAPSHOT
+  title: CoffeeShop API
+  contact:
+    email: froberge@redhat.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: Product Resource
+    description: All the product related Call
+paths:
+  /product:
+    get:
+      tags:
+        - Product Resource
+      summary: Return all the products list
+      operationId: getProducts
+      description: |
+        Return a list of all the products in the coffeeShop
+      responses:
+        '200':
+          description: Products found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      tags:
+        - Product Resource
+      summary: adds a product in the product list
+      operationId: addProduct
+      description: Adds an new item to the product list
+      responses:
+        '201':
+          description: item created
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing item already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+        description: Product item to add
+  /product/{id}:
+    get:
+      tags:
+        - Product Resource
+      summary: Select a particular product
+      operationId: getProductById
+      description: |
+        Return the product matching the proper id
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema: 
+            format: int32
+            type: integer
+          example: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Product'
+        '204':
+          description: No Product Found
+  /product/count:
+    get:
+      tags:
+        - Product Resource
+      summary: Return the number of product in the list of product
+      operationId: getProductsCount
+      description: |
+        Return the number of different product offer at the coffeeshop
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+  /product/size/{size}:
+    get:
+      tags:
+        - Product Resource
+      summary: Return the products for a given size
+      operationId: getProductsBySize
+      description: |
+        Return all products for a certain size
+      parameters: 
+        - name: size
+          in: path
+          required: true
+          schema: 
+            type: string
+          example: small
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+  /product/health:
+    get:
+      tags:
+        - Product Resource
+      summary: Check if the service is up and ready to receive request
+      operationId: health
+      description: |
+        Check if the service is up and ready to receive request
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    LocalDate:
+      format: date
+      type: string
+      example: 2022-03-10
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          example: Cortado
+        description:
+          type: string
+          example: Desc_Cortado_01
+        size:
+          type: string
+          example: small
+        price:
+          type: string
+          example: 3.50
+        create_date:
+          $ref: '#/components/schemas/LocalDate'
