@@ -13,8 +13,8 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
-import com.thecat.services.ProductService;
 import com.thecat.model.Product;
+import com.thecat.services.ProductService;
 
 @Path("/product")
 public class ProductResource {
